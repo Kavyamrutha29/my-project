@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Development Index Predictor</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 40px; color: #333; }
+        .container { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #555; }
+        input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        button { width: 100%; padding: 12px; background-color: #3498db; border: none; border-radius: 4px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #2980b9; }
+        .result-box { margin-top: 30px; padding: 15px; background-color: #e8f4fd; border-left: 5px solid #3498db; text-align: center; font-size: 18px; font-weight: bold; color: #2c3e50; border-radius: 0 4px 4px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Human Development Index (HDI) Simulator</h2>
+    
+    <form action="/predict" method="POST">
+        <div class="form-group">
+            <label for="Life_Expectancy">Life Expectancy at Birth (Years):</label>
+            <input type="number" step="0.01" name="Life_Expectancy" placeholder="e.g. 75.5" required>
+        </div>
+        <div class="form-group">
+            <label for="Expected_Years_Schooling">Expected Years of Schooling:</label>
+            <input type="number" step="0.01" name="Expected_Years_Schooling" placeholder="e.g. 13.2" required>
+        </div>
+        <div class="form-group">
+            <label for="GNI_Per_Capita">GNI Per Capita (PPP $):</label>
+            <input type="number" step="1" name="GNI_Per_Capita" placeholder="e.g. 15000" required>
+        </div>
+        <div class="form-group">
+            <label for="Internet_Users_Pct">Internet Users Percentage (%):</label>
+            <input type="number" step="0.01" name="Internet_Users_Pct" placeholder="e.g. 65.4" required>
+        </div>
+        <div class="form-group">
+            <label for="Carbon_Emission_Per_Capita">Carbon Emissions Per Capita:</label>
+            <input type="number" step="0.01" name="Carbon_Emission_Per_Capita" placeholder="e.g. 4.2" required>
+        </div>
+        
+        <button type="submit">Predict Human Development Tier</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result-box">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

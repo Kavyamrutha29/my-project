@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Home Dashboard - HDI Simulator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        .navbar { background: #2c3e50; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; color: white; }
+        .logout-btn { background: #e74c3c; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; }
+        .container { max-width: 600px; background: white; margin: 30px auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+        input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .predict-btn { width: 100%; padding: 12px; background: #3498db; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .result-box { margin-top: 25px; padding: 15px; background: #e8f4fd; border-left: 5px solid #3498db; text-align: center; font-size: 18px; font-weight: bold; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <span>Welcome to the Dashboard, <strong>{{ user_name }}</strong>!</span>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+<div class="container">
+    <h2 style="text-align: center; color: #2c3e50;">HDI Classification Analysis Panel</h2>
+    <form action="/predict" method="POST">
+        <div class="form-group">
+            <label>Life Expectancy at Birth (Years):</label>
+            <input type="number" step="0.01" name="Life_Expectancy" placeholder="e.g. 78.3" required>
+        </div>
+        <div class="form-group">
+            <label>Expected Years of Schooling:</label>
+            <input type="number" step="0.01" name="Expected_Years_Schooling" placeholder="e.g. 14.5" required>
+        </div>
+        <div class="form-group">
+            <label>GNI Per Capita (PPP $):</label>
+            <input type="number" step="1" name="GNI_Per_Capita" placeholder="e.g. 22000" required>
+        </div>
+        <div class="form-group">
+            <label>Internet Users Percentage (%):</label>
+            <input type="number" step="0.01" name="Internet_Users_Pct" placeholder="e.g. 72.1" required>
+        </div>
+        <div class="form-group">
+            <label>Carbon Emissions Per Capita:</label>
+            <input type="number" step="0.01" name="Carbon_Emission_Per_Capita" placeholder="e.g. 3.8" required>
+        </div>
+        <button type="submit" class="predict-btn">Predict Human Development Tier</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result-box">{{ prediction_text }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
